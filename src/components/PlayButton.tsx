@@ -2,6 +2,7 @@ import React, { useState, useRef } from "react";
 import { Play } from "./ui/Icons";
 import { Button } from "./ui/Button";
 import { appStore } from "@/lib/store";
+import { useTranslation } from "@/lib/i18n";
 import s from "./ui/Footer.module.css";
 
 const IS_SAFARI = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
@@ -35,6 +36,7 @@ const PlayingWaveform = ({
 );
 
 export default function PlayButton() {
+  const { t } = useTranslation();
   const [audioLoading, setAudioLoading] = useState(false);
   const [audioLoaded, setAudioLoaded] = useState(false);
   const [isPlaying, setIsPlaying] = useState(false);
@@ -128,7 +130,7 @@ export default function PlayButton() {
         setAudioLoading(false);
         setAudioLoaded(false);
         setIsPlaying(false);
-        alert("Error generating audio");
+        alert(t("errorGeneratingAudio"));
       };
 
       audio.onplay = () => {
@@ -180,7 +182,7 @@ export default function PlayButton() {
         <Play />
       )}
       <span className="uppercase hidden md:inline pr-3">
-        {isPlaying ? "Stop" : audioLoading ? "Busy" : "Play"}
+        {isPlaying ? t("stop") : audioLoading ? t("busy") : t("play")}
       </span>
     </Button>
   );

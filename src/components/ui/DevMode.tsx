@@ -9,6 +9,7 @@ import s from "./DevMode.module.css";
 import { appStore } from "@/lib/store";
 import { getCodeSnippet } from "../../lib/codeSnippet";
 import clsx from "clsx";
+import { useTranslation } from "@/lib/i18n";
 
 const fmTheme = createTheme({
   theme: "light",
@@ -42,6 +43,7 @@ const fmTheme = createTheme({
 });
 
 export const DevMode: React.FC = () => {
+  const { t } = useTranslation();
   const voice = appStore.useState((state) => state.voice);
   const input = appStore.useState((state) => state.input);
   const prompt = appStore.useState((state) => state.prompt);
@@ -76,7 +78,7 @@ export const DevMode: React.FC = () => {
         onChange={(nextCodeView) => {
           appStore.setState({ codeView: nextCodeView });
         }}
-        title="Code snippet"
+        title={t("codeSnippet")}
         tabs={[
           { id: "py", labelMobile: "PY", labelDesktop: "Python" },
           { id: "js", labelMobile: "JS", labelDesktop: "JavaScript" },

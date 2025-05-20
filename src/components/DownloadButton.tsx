@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Download } from "./ui/Icons";
 import { Button } from "./ui/Button";
 import { appStore } from "@/lib/store";
+import { useTranslation } from "@/lib/i18n";
 
 const PlayingWaveform = ({
   audioLoaded,
@@ -37,6 +38,7 @@ const IS_CHROME =
   ) === true;
 
 export default function DownloadButton() {
+  const { t } = useTranslation();
   const latestAudioUrl = appStore.useState((s) => s.latestAudioUrl);
   const [dataUrl, setDataUrl] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
@@ -142,7 +144,7 @@ export default function DownloadButton() {
       ) : (
         <Download />
       )}{" "}
-      <span className="uppercase hidden md:inline pr-3">Download</span>
+      <span className="uppercase hidden md:inline pr-3">{t("download")}</span>
     </Button>
   );
 }

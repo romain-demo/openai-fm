@@ -1,6 +1,7 @@
 import React, { ReactNode } from "react";
 import { Docs } from "./Icons";
 import { Button } from "./Button";
+import { useTranslation } from "@/lib/i18n";
 import s from "./Footer.module.css";
 import { CodeCopyButton } from "../CodeCopyButton";
 import PlayButton from "../PlayButton";
@@ -32,14 +33,14 @@ export const Footer = ({ devMode }: { devMode: boolean }) => {
 };
 
 const DocsLink = () => {
+  const { t } = useTranslation();
   return (
     <Button
       color="tertiary"
       href="https://platform.openai.com/docs/guides/text-to-speech"
     >
       <Docs />
-
-      <span className="uppercase hidden md:inline pr-3">Docs</span>
+      <span className="uppercase hidden md:inline pr-3">{t("docs")}</span>
     </Button>
   );
 };
