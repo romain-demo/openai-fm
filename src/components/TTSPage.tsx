@@ -1,5 +1,6 @@
 "use client";
 import React, { useState } from "react";
+import { useTranslation } from "@/lib/i18n";
 import {
   getRandomLibrarySet,
   getRandomVoice,
@@ -37,6 +38,7 @@ export default function TtsPage() {
 }
 
 const Board = () => {
+  const { t } = useTranslation();
   const voice = appStore.useState((state) => state.voice);
   const input = appStore.useState((state) => state.input);
   const inputDirty = appStore.useState((state) => state.inputDirty);
@@ -88,7 +90,7 @@ const Board = () => {
         />
       )}
       <div className="flex flex-row">
-        <Block title="Voice">
+        <Block title={t("voice")}> 
           <div className="grid grid-cols-12 gap-3">
             {VOICES.map((newVoice) => (
               <div
@@ -134,7 +136,7 @@ const Board = () => {
                   });
                 }}
                 className="aspect-4/3 sm:aspect-2/1 lg:aspect-2.5/1 xl:aspect-square max-h-[100px]"
-                aria-label="Select random voice"
+                aria-label={t("selectRandomVoiceAria")}
               >
                 <Shuffle />
               </Button>
@@ -143,7 +145,7 @@ const Board = () => {
         </Block>
       </div>
       <div className="flex flex-col md:flex-row gap-3">
-        <Block title="Vibe">
+        <Block title={t("vibe")}> 
           <div className="flex flex-col gap-3">
             <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-2 lg:grid-cols-3 gap-3">
               {librarySet.map((entry) => (
@@ -166,7 +168,7 @@ const Board = () => {
                 color="neutral"
                 onClick={handleRefreshLibrarySet}
                 className="aspect-4/3 sm:aspect-2/1 lg:aspect-2.5/1 min-h-[60px] max-h-[100px]"
-                aria-label="Generate new list of vibes"
+                aria-label={t("generateNewVibesAria")}
               >
                 <Regenerate />
               </Button>
@@ -188,7 +190,7 @@ const Board = () => {
             />
           </div>
         </Block>
-        <Block title="Script">
+        <Block title={t("script")}> 
           <div className="relative flex flex-col h-full w-full">
             <textarea
               id="prompt"
@@ -218,7 +220,7 @@ const Board = () => {
                   });
                 }}
               >
-                Reset
+                {t("reset")}
               </span>
             )}
             <span className="absolute bottom-3 right-4 z-10 opacity-30 hidden sm:block">
