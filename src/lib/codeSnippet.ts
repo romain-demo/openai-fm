@@ -47,6 +47,34 @@ const response = await openai.audio.speech.create({
 
 await playAudio(response);
 `;
+    case "go":
+      return `package main
+
+import (
+    "context"
+
+    openai "github.com/openai/openai-go"
+    "github.com/openai/openai-go/helpers/audio"
+)
+
+func main() {
+    client := openai.NewClient()
+
+    input := ${JSON.stringify(input)}
+    instructions := ${JSON.stringify(prompt)}
+
+    resp, err := client.CreateSpeech(context.Background(), &openai.CreateSpeechRequest{
+        Model: "gpt-4o-mini-tts",
+        Voice: "${voice}",
+        Input: input,
+        Instructions: instructions,
+    })
+    if err != nil {
+        panic(err)
+    }
+
+    audio.Play(resp)
+}`;
     case "curl":
       return `curl https://api.openai.com/v1/audio/speech \
 -H "Authorization: Bearer $OPENAI_API_KEY" \

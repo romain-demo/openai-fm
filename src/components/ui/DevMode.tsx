@@ -3,6 +3,8 @@ import CodeMirror from "@uiw/react-codemirror";
 import { EditorView } from "@codemirror/view";
 import { python } from "@codemirror/lang-python";
 import { javascript } from "@codemirror/lang-javascript";
+import { StreamLanguage } from "@codemirror/language";
+import { go as goLang } from "@codemirror/legacy-modes/mode/go";
 import { createTheme } from "@uiw/codemirror-themes";
 import { tags as t } from "@lezer/highlight";
 import s from "./DevMode.module.css";
@@ -80,6 +82,7 @@ export const DevMode: React.FC = () => {
         tabs={[
           { id: "py", labelMobile: "PY", labelDesktop: "Python" },
           { id: "js", labelMobile: "JS", labelDesktop: "JavaScript" },
+          { id: "go", labelMobile: "GO", labelDesktop: "Go" },
           { id: "curl", labelMobile: "CURL", labelDesktop: "cURL" },
         ]}
       >
@@ -97,6 +100,15 @@ export const DevMode: React.FC = () => {
             value={getCodeSnippet("js", { input, prompt, voice })}
             height={height}
             extensions={[javascript(), editorTheme]}
+            basicSetup={setup}
+            theme={fmTheme}
+          />
+        </div>
+        <div id="go" className={clsx(s.Container, "bg-screen")}>
+          <CodeMirror
+            value={getCodeSnippet("go", { input, prompt, voice })}
+            height={height}
+            extensions={[StreamLanguage.define(goLang), editorTheme]}
             basicSetup={setup}
             theme={fmTheme}
           />
