@@ -5,6 +5,8 @@
   --foreground: #222;
   --primary: #ff4a00;
   --page-max-width: 1300px;
+  --footer-background: #ececec70;
+  --footer-border-color: #fff;
 }
 
 @theme inline {
@@ -33,6 +35,7 @@
 html {
   font-size: 14px;
   line-height: 130%;
+  color-scheme: light dark;
 }
 
 body {
@@ -52,4 +55,26 @@ body {
 svg {
   display: block;
   flex-shrink: 0;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #1e1e1e;
+    --foreground: #e5e5e5;
+    --color-screen: #000000;
+    --color-black-10: rgba(255, 255, 255, 0.1);
+    --color-black-50: rgba(255, 255, 255, 0.5);
+    --footer-background: #00000070;
+    --footer-border-color: #333;
+  }
+
+  body {
+    @variant sm {
+      background-image: linear-gradient(
+        to bottom right,
+        #000000,
+        var(--background) 20%
+      );
+    }
+  }
 }
